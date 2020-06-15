@@ -53,7 +53,8 @@ wd = wn*(1-zeta^2)^0.5;
 p1 = -sigma+1i*wd;
 p2 = conj(p1);
 p3 = -sigma*10; % Desired pole location
-p4 = -sigma*11; % Desired pole location
+%p4 = -sigma*11; % Desired pole location
+p4 = -5.9473;
 % State-feedback gain
 % One can customize this function or uses
 % built-in functions of MATLAB
@@ -82,7 +83,3 @@ disp("Closed Loop Settling Time");
 disp(info.SettlingTime);
 end
 %% Plot the result
-
-
-
-

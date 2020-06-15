@@ -9,7 +9,7 @@
 
 clear all;
 [K,N,info] = setup_FURPEN();
-C1 = 200; %Step to run as regulator
+C1 = 400; %Step to run as regulator
 C2 = 300;
 C3 = 300;
 output = zeros(2,C1+C2+C3);
@@ -84,11 +84,11 @@ legend('SystemResponse','Reference Input');
 Peak = max(output(2,C1+1:C1+C2));
 perc_overshoot = (Peak-1)/1*100;
 %Computing Settling Time
-settling_absvalue = 1+0.02;
+settling_threshold = 0.02;
 counter = C1+C2;
 while counter > C1
-    if abs(output(2,counter)) > settling_absvalue
-        setling_time=output(1,i)-output(1,C1+1);
+    if abs(1-output(2,counter)) > settling_threshold
+        setling_time=output(1,counter)-output(1,C1+1);
         p = counter;
         counter=0;
     end
@@ -98,7 +98,3 @@ disp("Measured Percentage Overshoot:");
 disp(perc_overshoot);
 disp("Measured Settling Time:");
 disp(setling_time);
-
-
-
-

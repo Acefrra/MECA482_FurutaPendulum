@@ -48,7 +48,7 @@ for i=1:1:C2
     output(1,C1+i) = tt{1,2};
     output(2,C1+i) = theta;
 end
-r = -2;
+r = -3.14;
 for i=1:1:C3
     state = client.simxCallScriptFunction('measure_state@Dummy',6,-1,client.simxServiceCall());
     theta = state{1,2}{1};

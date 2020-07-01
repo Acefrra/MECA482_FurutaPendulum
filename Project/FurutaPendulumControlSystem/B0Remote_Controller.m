@@ -15,18 +15,18 @@ client=b0RemoteApi('b0RemoteApi_matlabClient','b0RemoteApiAddOn');
 %% Simulation Setup
 %Simulation Step and Duration
 %Select here the simulation step time[s]
-step_time = 0.005;
+step_time = 0.020; %Faster but Less Accurate
 % This is a wait time to improve real time and accuracy of the controller.
 % This wait_time allow to Coppelia to compute the next step before
 % measuring any state from it.
 wait_time = step_time/3.5;
-%Time[s] to swing_up system
-swing_up_time = 10;
-%Time[s] to bring the system at theta = 0
+%Maximum Time[s] given to swing_up system
+swing_up_time = 8;
+%Maximum Time[s] given to bring the system at theta = 0
 regulator_time = 8;
-%Time[s] to follow a unitary step
+%Maximum Time[s] given to follow a unitary step
 unitarystep_time = 5;
-%Time[s] to follow a custom step
+%Maximum Time[s] given to follow a custom step
 customstep_time = 5;
 C0 = round(swing_up_time/step_time);
 C1 = round(regulator_time/step_time);
@@ -82,6 +82,7 @@ end
 client.simxCallScriptFunction('reset_state@Dummy',6,-1,client.simxServiceCall());
 client.simxCallScriptFunction('reset_state@Frame',1,-1,client.simxServiceCall());
 rr = r;
+eps_dyn = pi/4;
 %% Step 2) - Bring theta to 0
 r = 0;
 for i=1:1:C1

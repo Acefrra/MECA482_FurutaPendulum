@@ -2,7 +2,7 @@ function sysCall_init()
     -- do some initialization here
     
 
-    --Initializing time and state
+    --Initializing time and stat
     init_measure_state();
 end
 

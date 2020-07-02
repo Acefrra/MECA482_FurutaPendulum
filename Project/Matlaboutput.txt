@@ -1,0 +1,32 @@
+The simulation time is going to last 26 seconds
+.Desired Overshoot:
+    10
+
+Desired Settling Time:
+     3
+
+ 
+Control gains: 
+   -0.3459    8.1945   -0.7974    1.2009
+
+Closed loop eigenvalues
+ -13.3333 + 0.0000i
+  -1.3333 + 1.8192i
+  -1.3333 - 1.8192i
+  -5.9473 + 0.0000i
+
+Closed Loop Overshoot
+   10.3725
+
+Closed Loop Settling Time
+    2.8432
+
+*************************************************************************************
+** Leaving... if this is unexpected, you might have to adjust the timeout argument **
+*************************************************************************************
+Simulation ended
+Measured Percentage Overshoot:
+    8.6627
+
+Measured Settling Time:
+    3.0900

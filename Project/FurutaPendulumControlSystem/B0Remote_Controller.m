@@ -15,7 +15,7 @@ client=b0RemoteApi('b0RemoteApi_matlabClient','b0RemoteApiAddOn');
 %% Simulation Setup
 %Simulation Step and Duration
 %Select here the simulation step time[s]
-step_time = 0.020; %Faster but Less Accurate
+step_time = 0.010;
 % This is a wait time to improve real time and accuracy of the controller.
 % This wait_time allow to Coppelia to compute the next step before
 % measuring any state from it.
@@ -161,9 +161,9 @@ reference(2,1:C0) = rr;
 reference(2,C0+1:C0+C1) = 0;
 reference(2,C0+C1+1:C0+C1+C2) = 1;
 reference(2,C0+C1+C2+1:C0+C1+C2+C3) = -3.5;
-plot(output(1,:),output(2,:));
+plot(output(1,C0+1:C0+C1+C2+C3),output(2,C0+1:C0+C1+C2+C3));
 hold on;
-plot(reference(1,:),reference(2,:));
+plot(reference(1,C0+1:C0+C1+C2+C3),reference(2,C0+1:C0+C1+C2+C3));
 title("Furuta Pendulum System Response");
 xlabel("Time");
 ylabel("Theta");

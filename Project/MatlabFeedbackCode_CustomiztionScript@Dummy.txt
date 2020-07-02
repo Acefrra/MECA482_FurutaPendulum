@@ -1,0 +1,69 @@
+-- See the user manual or the available code snippets for additional callback functions and details
+-- This is the sensing code for the state of the system. This set of function will be called by Matlab
+-- The sensing code in the child script @Frame just compute thetadot for the electro actuation
+function init_measure_state()
+    Pendulum = sim.getObjectHandle("Pendulum");
+    RotatingArm = sim.getObjectHandle("RotatingArm");
+    Frame = sim.getObjectHandle("Frame");
+    --Getting the Transformation Matrix to measure the components of the CM of Pendulum and RotatingArm w.r.t. previous body
+    arm2pendulum = sim.getObjectMatrix(Pendulum, RotatingArm);
+    frame2arm = sim.getObjectMatrix(RotatingArm,Frame);
+    previous_time = sim.getSimulationTime()-0.01;
+    --Compute the angle starting from the (y,z) components of the Center of Mass
+    previous_theta = -math.atan2(frame2arm[4], frame2arm[8])-0.01;
+    previous_theta_correct = previous_theta;
+    previous_alpha = math.atan2(arm2pendulum[4], arm2pendulum[8])-0.01;
+    --Initializing counter theta for correcting the corresponding angle
+    c_theta = 0;
+end
+
+function measure_state ()
+    --Getting TM
+    arm2pendulum = sim.getObjectMatrix(Pendulum, RotatingArm);
+    frame2arm = sim.getObjectMatrix(RotatingArm,Frame);
+    --Time
+    actual_time = sim.getSimulationTime();
+    --Computing angles
+    actual_alpha = math.atan2(arm2pendulum[4], arm2pendulum[8]);
+    actual_theta = -math.atan2(frame2arm[4], frame2arm[8]);
+    --Updating counter for theta
+    if(actual_theta*previous_theta<0) then
+        if (math.abs(previous_theta)>1) then
+            if actual_theta>0 then
+                c_theta = c_theta - 1;
+            else
+                c_theta = c_theta + 1;
+            end
+        end
+    end
+    --Computing alphadot -- For alpha there is no counter otherwise it screws the swing-up control
+    alphadot = (actual_alpha - previous_alpha)/(actual_time-previous_time);
+    if(actual_alpha*previous_alpha<0) then
+        if (math.abs(previous_alpha)>1) then
+            alphadot_abs = (math.abs((math.pi-math.abs(actual_alpha)) + (math.pi -math.abs(previous_alpha))))/(actual_time-previous_time);
+            if actual_alpha>0 then
+                alphadot = alphadot_abs;
+            else
+                alphadot = -alphadot_abs;
+            end
+        end
+    end
+    --Correcting theta and computing its derivative
+    theta_correct = actual_theta + c_theta*2*math.pi;
+    thetadot = (theta_correct - previous_theta_correct)/(actual_time-previous_time);
+    --Storing Previous angles
+    previous_alpha = actual_alpha;
+    previous_theta = actual_theta;
+    alpha_correct = actual_alpha;
+    previous_theta_correct = theta_correct;
+    previous_time = actual_time;
+    --print("Measure. the state is", theta_correct, alpha_correct,thetadot, alphadot);
+    return({theta_correct, alpha_correct, thetadot, alphadot});
+end
+
+-- This function reset the counter for the angle theta. It is called after the swing up.
+function reset_state()
+    c_theta = 0;
+    previous_theta_correct = -math.atan2(frame2arm[4], frame2arm[8])+0.01;
+end
+    

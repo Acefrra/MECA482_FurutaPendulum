@@ -38,9 +38,6 @@ function [K,N,info,Ep, Ek,K_swing1,K_swing2,mu,eps] = setup_FURPEN()
     disp(roots(num));
     disp("Poles");
     disp(roots(den));
-    figure(1);
-    rlocus(TF)
-    title("Root Locus Furuta Pendulum");
     %% Balance controller
     % The requirements of the system
     perc_OS = 10;   %10 Overshoot
@@ -75,15 +72,8 @@ function [K,N,info,Ep, Ek,K_swing1,K_swing2,mu,eps] = setup_FURPEN()
     %Computing gain
     N = 1/DC;
     info = stepinfo(TF);
-    disp("Transfer Function Closed Loop");
-    TF
-    disp("Zeros");
-    disp(roots(num));
-    disp("Poles");
-    disp(roots(den));
-    figure(2);
-    rlocus(TF)
-    title("Root Locus Closed Loop");
+    disp("Closed Loop Transfer Function");
+    rlocus(TF);
     disp("Closed Loop Overshoot");
     disp(info.Overshoot);
     disp("Closed Loop Settling Time");

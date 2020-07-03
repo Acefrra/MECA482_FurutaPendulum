@@ -38,7 +38,7 @@ function [K,N,info,Ep, Ek,K_swing1,K_swing2,mu,eps] = setup_FURPEN()
     disp(roots(num));
     disp("Poles");
     disp(roots(den));
-    figure(1);
+    figure(134);
     rlocus(TF)
     title("Root Locus Furuta Pendulum");
     %% Balance controller
@@ -81,7 +81,7 @@ function [K,N,info,Ep, Ek,K_swing1,K_swing2,mu,eps] = setup_FURPEN()
     disp(roots(num));
     disp("Poles");
     disp(roots(den));
-    figure(2);
+    figure(223);
     rlocus(TF)
     title("Root Locus Closed Loop");
     disp("Closed Loop Overshoot");

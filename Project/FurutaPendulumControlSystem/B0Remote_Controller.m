@@ -11,7 +11,7 @@
 clear all;
 pause on;
 %% Connection to Coppelia
-client=b0RemoteApi('b0RemoteApi_matlabClient','b0RemoteApiAddOn');
+%client=b0RemoteApi('b0RemoteApi_matlabClient','b0RemoteApiAddOn');
 %% Simulation Setup
 %Simulation Step and Duration
 %Select here the simulation step time[s]
@@ -35,7 +35,7 @@ C3 = round(customstep_time/step_time);
 simulation_time = swing_up_time+regulator_time+unitarystep_time+customstep_time;
 fprintf("The simulation time is going to last %d seconds\n.", simulation_time);
 %Setting the Step Time of the simulation
-client.simxSetFloatParameter(1, step_time, client.simxServiceCall());
+%client.simxSetFloatParameter(1, step_time, client.simxServiceCall());
 %% Setting up controller (Swing-Up Balance and Input Tracker)
 [K,N,info,Ep,Ek,K_swing1, K_swing2, mu, eps] = setup_FURPEN();
 %% Setting the output vector

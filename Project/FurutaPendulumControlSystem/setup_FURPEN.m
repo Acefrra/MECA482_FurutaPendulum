@@ -1,8 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                   MECA482 - Furuta Pendulum Controller
-%   Aaron Taylor-Angel Sanchez-Ingrid Tisell-Michele Fragasso-Joe Karam
+%%%%%%%%%%%%%%%%%%%%%MECA482 - Furuta Pendulum Controller%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%This function compute the gain controller K and the scaling block N touse
+%This function compute the gain controller K and the scaling block N to use
 %the system as a tracker of the reference signal which is the angle 
 %theta(t) of the rotating arm
 %% SETUP Rotpen

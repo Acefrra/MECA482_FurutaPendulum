@@ -8,3 +8,7 @@ This Furuta Pendulum Controller implements:
 1.  Balancer
 2.  Input Tracker
 3.  Swing-Up
+
+
+https://github.com/user-attachments/assets/d09488ff-7264-46d8-8347-9cb477208dc2
+
